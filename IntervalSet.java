@@ -30,7 +30,7 @@ public class IntervalSet {
 
   private int opt(int i) {
     // implement this
-    if (M[i] != -1){ //memo check
+    if (M[i] != -1){ //memo case
       return M[i];
     }
     int select = theIntervals.get(i).weight + opt(p[i]);
@@ -91,6 +91,13 @@ public class IntervalSet {
   }
 
   M[0] = 0;
+
+  opt(n);
+
+  List<Interval> sch = new ArrayList<Interval>();
+  traceback(n, sch);
+
+  return sch;
 
 
 
