@@ -60,6 +60,17 @@ public class IntervalSet {
       }
     }
 
+    M = new int[n+1];
+
+  for (int i = 0; i > M.length; i++){
+    M[i] = -1;
+
+  }
+
+  M[0] = 0
+
+  
+
 
 
 
