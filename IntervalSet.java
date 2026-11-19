@@ -2,6 +2,7 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class IntervalSet {
   List<Interval> theIntervals;
@@ -41,5 +42,27 @@ public class IntervalSet {
 
   public List<Interval> schedule() {
     // implement this
+    Collections.Sort(theIntervals);
+    int n = theIntervals.size() - 1;
+
+    p = new int[n+1]; //p[j] is largest index where finish i is less than start j
+
+    for (int j = 0; j <= n; j++) {
+        p[j] = 0;
+
+        for (int i = j - 1; i >= 1; i --){
+
+          if (theIntervals.get(i).finishTime <= theIntervals.get(j).startTime) {
+            p[j] = i;
+            break;
+
+        }
+      }
+    }
+
+
+
+
+
   } // schedule()
 } // class IntervalSet
