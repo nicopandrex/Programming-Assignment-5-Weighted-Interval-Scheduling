@@ -30,24 +30,47 @@ public class IntervalSet {
 
   private int opt(int i) {
     // implement this
+    if (M[i] != -1){ //memo check
+      return M[i];
+    }
+    int select = theIntervals.get(i).weight + opt(p[i]);
+
+    int skip = opt(i-1);
+
+    M[i] = Math.max(select, skip); //take better option
+
+    return M[i];
+
+
   } // opt()
 
   //----------------------------------------------------------------
 
   private void traceback(int i, List<Interval> sch) {
     // implement this
+    if (i == 0) { //base case
+      return;
+    }
+
+    if (theIntervals.get(i).weight + M[p[i]] >= M[i-1]){
+      sch.add(theIntervals.get(i));
+      traceback(p[i], sch);
+    }
+    else{
+      traceback(i - 1, sch);
+    }
   } // traceback()
 
   //----------------------------------------------------------------
 
   public List<Interval> schedule() {
     // implement this
-    Collections.Sort(theIntervals);
+    Collections.sort(theIntervals);
     int n = theIntervals.size() - 1;
 
     p = new int[n+1]; //p[j] is largest index where finish i is less than start j
 
-    for (int j = 0; j <= n; j++) {
+    for (int j = 1; j <= n; j++) {
         p[j] = 0;
 
         for (int i = j - 1; i >= 1; i --){
@@ -62,15 +85,12 @@ public class IntervalSet {
 
     M = new int[n+1];
 
-  for (int i = 0; i > M.length; i++){
+  for (int i = 0; i < M.length; i++){
     M[i] = -1;
 
   }
 
-  M[0] = 0
-
-  
-
+  M[0] = 0;
 
 
 
